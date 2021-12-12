@@ -41,11 +41,12 @@ echo "================================="
 if [[ -n "$ADDITIONALPACKAGES" ]]; then
   echo "** MESSAGE: You have specified additional packages to install"
   echo "** ACTION: Install additional packages"
+  sudo dnf install $ADDITIONALPACKAGES
 fi
 echo "================================="
 
 echo "** ACTION: Create '~/Sources' directory"
 mkdir -p $HOME/Sources
 echo "** ACTION: Clone $SCOPE repository"
-#git clone git@github.com:crawfordlong/fedoraconfig.git
+#git clone git@github.com:crawfordlong/fedoraconfig.git ~/Sources
 

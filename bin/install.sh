@@ -45,8 +45,17 @@ if [[ -n "$ADDITIONALPACKAGES" ]]; then
 fi
 echo "================================="
 
-echo "** ACTION: Create '~/Sources' directory"
-mkdir -p $HOME/Sources
-echo "** ACTION: Clone $SCOPE repository"
-#git clone git@github.com:crawfordlong/fedoraconfig.git ~/Sources
+echo "*** MESSAGE: Setting up '~/Sources'"
+if [[ -e "~/Sources" ]]; then
+  echo "*** MESSAGE: Sources directory already exists"
+else
+  echo "** ACTION: Create '~/Sources' directory"
+  mkdir -p $HOME/Sources
+fi
 
+echo "*** MESSAGE: Cloning 'fedoraconfig' to ~/Sources from github"
+if [[ -e "~/Sources/fedoraconfig" ]]; then
+  echo "MESSAGE: 'fedoraconfig' exists. You may experience errors if changes are not synchronized." 
+else
+  echo "** ACTION: Clone $SCOPE repository"
+  git clone git@github.com:crawfordlong/fedoraconfig.git ~/Sources

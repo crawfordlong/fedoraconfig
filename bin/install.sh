@@ -84,8 +84,6 @@ else
   git clone git@github.com:crawfordlong/fedoraconfig.git ~/Sources
 fi
 
-pushd $HOME
-
 # Clone dotfiles repository from github
 printf "** MESSAGE: Cloning '.dotfiles' repository to ~ from github\n"
 if [[ -d ~/.dotfiles ]]; then
@@ -95,16 +93,12 @@ else
   git clone git@github.com:crawfordlong/.dotfiles.git ~/.dotfiles
 fi
 
-pushd .dotfiles
-git submodule update --init $SCOPE
-git checkout main
-if [[ -d ".git-crypt" ]]; then
-  git-crypt unlock
-fi
-popd 
+#git submodule update --init $SCOPE
+#git checkout main
+#if [[ -d "~/.dotfiles/.git-crypt" ]]; then
+#  git-crypt unlock
+#fi
 
 #./install-$SCOPE
-
-popd
 
 printf "\n"

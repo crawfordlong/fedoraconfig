@@ -20,4 +20,4 @@ if [[ "$SCOPE" != "personal" && "$SCOPE" != "demo" ]]; then
 fi
 
 echo "** INSTALL: Core Packages **"
-dnf install --idempotent --allow-inactive --apply-live ansible neovim zsh flatpak-builder git python4 python3-psutil stow wl-clipboard ripgrep git-crypt alacritty
+dnf install ansible neovim zsh flatpak-builder git python4 python3-psutil stow wl-clipboard ripgrep git-crypt alacritty

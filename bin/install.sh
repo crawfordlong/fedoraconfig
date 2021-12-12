@@ -64,7 +64,7 @@ if [[ -n "$ADDITIONALPACKAGES" ]]; then
   sudo dnf install $ADDITIONALPACKAGES
 fi
 
-# Create directories and clone git repo
+# Create directories
 printf $SEPARATOR
 printf "\e[92;1mSETUP WORKSPACE\e[39;0m\n\n"
 printf "** MESSAGE: Setting up '~/Sources'\n"
@@ -75,6 +75,7 @@ else
   mkdir -p $HOME/Sources
 fi
 
+# Clone fedoraconfig repository from github
 printf "** MESSAGE: Cloning 'fedoraconfig' to ~/Sources from github\n"
 if [[ -d ~/Sources/fedoraconfig ]]; then
   printf "** MESSAGE: 'fedoraconfig' exists. You may experience errors if changes are not synchronized.\n" 
@@ -82,5 +83,28 @@ else
   printf "** ACTION: Clone $SCOPE repository\n"
   git clone git@github.com:crawfordlong/fedoraconfig.git ~/Sources
 fi
+
+pushd $HOME
+
+# Clone dotfiles repository from github
+printf "** MESSAGE: Cloning '.dotfiles' repository to ~ from github\n"
+if [[ -d ~/.dotfiles ]]; then
+  printf "** MESSAGE: '.dotfiles' directory exists. You may experience errors if changes are not synchronized.\n" 
+else
+  printf "** ACTION: Clone .dotfiles repository\n"
+  git clone git@github.com:crawfordlong/.dotfiles.git ~/.dotfiles
+fi
+
+pushd .dotfiles
+git submodule update --init $SCOPE
+git checkout main
+if [[ -d ".git-crypt" ]]; then
+  git-crypt unlock
+fi
+popd 
+
+#./install-$SCOPE
+
+popd
 
 printf "\n"

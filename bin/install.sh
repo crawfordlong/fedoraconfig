@@ -39,23 +39,26 @@ echo "================================="
 
 # Install additional packages, if specified
 if [[ -n "$ADDITIONALPACKAGES" ]]; then
-  echo "** MESSAGE: You have specified additional packages to install"
-  echo "** ACTION: Install additional packages"
-  sudo dnf install $ADDITIONALPACKAGES
+  echo "*** MESSAGE: You have specified additional packages to install"
+  echo "*** ACTION: Install additional packages"
+  #sudo dnf install $ADDITIONALPACKAGES
 fi
 echo "================================="
 
 echo "*** MESSAGE: Setting up '~/Sources'"
-if [[ -e "~/Sources" ]]; then
+if [[ -d "~/Sources" ]]; then
   echo "*** MESSAGE: Sources directory already exists"
 else
   echo "** ACTION: Create '~/Sources' directory"
   mkdir -p $HOME/Sources
 fi
 
+exit 1
+
 echo "*** MESSAGE: Cloning 'fedoraconfig' to ~/Sources from github"
-if [[ -e "~/Sources/fedoraconfig" ]]; then
+if [[ -d "~/Sources/fedoraconfig" ]]; then
   echo "MESSAGE: 'fedoraconfig' exists. You may experience errors if changes are not synchronized." 
 else
-  echo "** ACTION: Clone $SCOPE repository"
+  echo "*** ACTION: Clone $SCOPE repository"
   git clone git@github.com:crawfordlong/fedoraconfig.git ~/Sources
+fi

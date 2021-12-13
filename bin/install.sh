@@ -21,6 +21,11 @@ function YNPrompt {
   fi
 }
 
+function argument_validate() {
+  
+  return 1
+}
+
 # Assign values to variables using arguments
 #
 # -s: $SCOPE
@@ -28,8 +33,18 @@ function YNPrompt {
 #
 while getopts s: option
   do case "${option}" in
-    s) SCOPE=${OPTARG};;
-    p) ADDITIONALPACKAGES=${OPTARG};;
+    s) 
+      argument_validate(${OPTARG})
+      SCOPE=${OPTARG}
+      ;;
+    p) 
+      argument_validate(${OPTARG})
+      ADDITIONALPACKAGES=${OPTARG}
+      ;;
+    *) 
+      printf "** ERROR (INVALID SCOPE): You have specified an invalid argument.\n\n"
+      printf "\e[31;1mExiting...\e[39;0m\n\n"
+      ;;
   esac
 done
 
